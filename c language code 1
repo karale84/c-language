@@ -11,10 +11,9 @@ int main() {
     
     if (n <= 0) {
         printf("Please enter a positive integer.\n");
-        return 1; // Exit with an error code
-    }
+        return 1; 
 
-    int arr[n]; // Declare an array of size n
+    int arr[n]; 
 
    
     printf("Enter %d numbers:\n", n);
