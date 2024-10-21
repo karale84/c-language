@@ -1,58 +1,52 @@
 #include <stdio.h>
 
-int main() {
-    int row1, col1, row2, col2;
+#define SIZE 3
 
-      printf("Enter the number of rows and columns of the first matrix: ");
-    scanf("%d %d", &row1, &col1);
-    
-  printf("Enter the number of rows and columns of the second matrix: ");
-    scanf("%d %d", &row2, &col2);
-    
-      if (col1 != row2) {
-        printf("Error: Number of columns in the first matrix must equal the number of rows in the second matrix.\n");
-        return 1;
-    }
-
-    int matrix1[row1][col1], matrix2[row2][col2], product[row1][col2];
-
-    printf("Enter elements of the first matrix:\n");
-    for (int i = 0; i < row1; i++) {
-        for (int j = 0; j < col1; j++) {
-            printf("Element [%d][%d]: ", i, j);
-            scanf("%d", &matrix1[i][j]);
-        }
-    }
-
-    printf("Enter elements of the second matrix:\n");
-    for (int i = 0; i < row2; i++) {
-        for (int j = 0; j < col2; j++) {
-            printf("Element [%d][%d]: ", i, j);
-            scanf("%d", &matrix2[i][j]);
-        }
-    }
-
-     for (int i = 0; i < row1; i++) {
-        for (int j = 0; j < col2; j++) {
-            product[i][j] = 0;
-        }
-    }
-
-     for (int i = 0; i < row1; i++) {
-        for (int j = 0; j < col2; j++) {
-            for (int k = 0; k < col1; k++) {
-                product[i][j] += matrix1[i][k] * matrix2[k][j];
+void multiplyMatrices(int first[SIZE][SIZE], int second[SIZE][SIZE], int result[SIZE][SIZE]) {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            result[i][j] = 0; // Initialize the result element
+            for (int k = 0; k < SIZE; k++) {
+                result[i][j] += first[i][k] * second[k][j]; 
             }
         }
     }
+}
 
-     printf("Product of the two matrices:\n");
-    for (int i = 0; i < row1; i++) {
-        for (int j = 0; j < col2; j++) {
-            printf("%d ", product[i][j]);
+void printMatrix(int matrix[SIZE][SIZE]) {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            printf("%d ", matrix[i][j]);
         }
         printf("\n");
     }
+}
+
+int main() {
+    int first[SIZE][SIZE], second[SIZE][SIZE], result[SIZE][SIZE];
+
+   
+    printf("Enter elements of the first 3x3 matrix:\n");
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            scanf("%d", &first[i][j]);
+        }
+    }
+
+    
+    printf("Enter elements of the second 3x3 matrix:\n");
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            scanf("%d", &second[i][j]);
+        }
+    }
+
+    
+    multiplyMatrices(first, second, result);
+
+  
+    printf("Resultant matrix after multiplication:\n");
+    printMatrix(result);
 
     return 0;
 }
